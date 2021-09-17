@@ -34,6 +34,13 @@
       "tags": [],
       "implicitDependencies": ["containify-host"]
     },
+    "containify-remote": {
+      "tags": []
+    },
+    "containify-remote-e2e": {
+      "tags": [],
+      "implicitDependencies": ["containify-remote"]
+    },
     "core": {
       "tags": []
     }

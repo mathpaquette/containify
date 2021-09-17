@@ -120,6 +120,125 @@
         }
       }
     },
+    "containify-remote": {
+      "projectType": "application",
+      "root": "apps/containify-remote",
+      "sourceRoot": "apps/containify-remote/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/containify-remote",
+            "index": "apps/containify-remote/src/index.html",
+            "main": "apps/containify-remote/src/main.ts",
+            "polyfills": "apps/containify-remote/src/polyfills.ts",
+            "tsConfig": "apps/containify-remote/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/containify-remote/src/favicon.ico",
+              "apps/containify-remote/src/assets"
+            ],
+            "styles": ["apps/containify-remote/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/containify-remote/src/environments/environment.ts",
+                  "with": "apps/containify-remote/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "containify-remote:build:production"
+            },
+            "development": {
+              "browserTarget": "containify-remote:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "containify-remote:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/containify-remote/src/**/*.ts",
+              "apps/containify-remote/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/containify-remote"],
+          "options": {
+            "jestConfig": "apps/containify-remote/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "containify-remote-e2e": {
+      "root": "apps/containify-remote-e2e",
+      "sourceRoot": "apps/containify-remote-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/containify-remote-e2e/cypress.json",
+            "devServerTarget": "containify-remote:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "containify-remote:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/containify-remote-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "core": {
       "projectType": "library",
       "root": "libs/core",
