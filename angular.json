@@ -1,6 +1,125 @@
 {
   "version": 1,
   "projects": {
+    "containify-host": {
+      "projectType": "application",
+      "root": "apps/containify-host",
+      "sourceRoot": "apps/containify-host/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/containify-host",
+            "index": "apps/containify-host/src/index.html",
+            "main": "apps/containify-host/src/main.ts",
+            "polyfills": "apps/containify-host/src/polyfills.ts",
+            "tsConfig": "apps/containify-host/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/containify-host/src/favicon.ico",
+              "apps/containify-host/src/assets"
+            ],
+            "styles": ["apps/containify-host/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/containify-host/src/environments/environment.ts",
+                  "with": "apps/containify-host/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "containify-host:build:production"
+            },
+            "development": {
+              "browserTarget": "containify-host:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "containify-host:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/containify-host/src/**/*.ts",
+              "apps/containify-host/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/containify-host"],
+          "options": {
+            "jestConfig": "apps/containify-host/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "containify-host-e2e": {
+      "root": "apps/containify-host-e2e",
+      "sourceRoot": "apps/containify-host-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/containify-host-e2e/cypress.json",
+            "devServerTarget": "containify-host:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "containify-host:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/containify-host-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "core": {
       "projectType": "library",
       "root": "libs/core",

@@ -27,6 +27,13 @@
     ]
   },
   "projects": {
+    "containify-host": {
+      "tags": []
+    },
+    "containify-host-e2e": {
+      "tags": [],
+      "implicitDependencies": ["containify-host"]
+    },
     "core": {
       "tags": []
     }
