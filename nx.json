@@ -43,6 +43,9 @@
     },
     "core": {
       "tags": []
+    },
+    "ui-bootstrap": {
+      "tags": []
     }
   }
 }

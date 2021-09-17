@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngx-containify/core": ["libs/core/src/index.ts"]
+      "@ngx-containify/core": ["libs/core/src/index.ts"],
+      "@ngx-containify/ui-bootstrap": ["libs/ui/bootstrap/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
