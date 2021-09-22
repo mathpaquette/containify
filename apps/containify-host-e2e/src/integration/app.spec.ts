@@ -1,13 +1,8 @@
-import { getGreeting } from '../support/app.po';
-
 describe('containify-host', () => {
   beforeEach(() => cy.visit('/'));
 
-  it.skip('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to containify-host!');
+  it('should', () => {
+    cy.get('.header').contains('[app1] route1').click();
+    cy.url().should('include', '/apps/remote-app1/route1/route?query=query1');
   });
 });
