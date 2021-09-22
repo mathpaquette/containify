@@ -24,7 +24,8 @@
     "help": "nx help",
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main && node decorate-angular-cli.js",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "serve:all": "ts-node apps/containify-host/scripts/serve-all.ts"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "@angular/platform-browser-dynamic": "^12.2.0",
     "@angular/router": "^12.2.0",
     "@nrwl/angular": "^12.9.0",
+    "penpal": "^6.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

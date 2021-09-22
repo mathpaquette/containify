@@ -17,10 +17,7 @@
             "polyfills": "apps/containify-host/src/polyfills.ts",
             "tsConfig": "apps/containify-host/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/containify-host/src/favicon.ico",
-              "apps/containify-host/src/assets"
-            ],
+            "assets": ["apps/containify-host/src/favicon.ico", "apps/containify-host/src/assets"],
             "styles": ["apps/containify-host/src/styles.scss"],
             "scripts": []
           },
@@ -78,10 +75,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/containify-host/src/**/*.ts",
-              "apps/containify-host/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/containify-host/src/**/*.ts", "apps/containify-host/src/**/*.html"]
           }
         },
         "test": {
@@ -99,7 +93,7 @@
       "sourceRoot": "apps/containify-host-e2e/src",
       "projectType": "application",
       "architect": {
-        "e2e": {
+        "e2e-cypress": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/containify-host-e2e/cypress.json",
@@ -109,6 +103,12 @@
             "production": {
               "devServerTarget": "containify-host:serve:production"
             }
+          }
+        },
+        "e2e": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ts-node apps/containify-host-e2e/scripts/start-e2e.ts"]
           }
         },
         "lint": {
@@ -136,10 +136,7 @@
             "polyfills": "apps/containify-remote/src/polyfills.ts",
             "tsConfig": "apps/containify-remote/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/containify-remote/src/favicon.ico",
-              "apps/containify-remote/src/assets"
-            ],
+            "assets": ["apps/containify-remote/src/favicon.ico", "apps/containify-remote/src/assets"],
             "styles": ["apps/containify-remote/src/styles.scss"],
             "scripts": []
           },
@@ -183,7 +180,8 @@
               "browserTarget": "containify-remote:build:production"
             },
             "development": {
-              "browserTarget": "containify-remote:build:development"
+              "browserTarget": "containify-remote:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
@@ -197,10 +195,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/containify-remote/src/**/*.ts",
-              "apps/containify-remote/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/containify-remote/src/**/*.ts", "apps/containify-remote/src/**/*.html"]
           }
         },
         "test": {
@@ -272,10 +267,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/core/src/**/*.ts",
-              "libs/core/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/core/src/**/*.ts", "libs/core/src/**/*.html"]
           }
         }
       }
@@ -313,10 +305,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/bootstrap/src/**/*.ts",
-              "libs/ui/bootstrap/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/ui/bootstrap/src/**/*.ts", "libs/ui/bootstrap/src/**/*.html"]
           }
         }
       }

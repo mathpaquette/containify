@@ -3,14 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { ContainifyCoreModule } from '@ngx-containify/core';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot([], { useHash: true }),
+    ContainifyCoreModule.withConfig({ host: true }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
