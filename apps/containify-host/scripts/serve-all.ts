@@ -4,9 +4,9 @@ import * as kill from 'tree-kill';
 let apps: ChildProcess[];
 
 (async () => {
-  const hostCmd = 'nx serve containify-host';
-  const remote1Cmd = 'nx serve containify-remote --port 4201';
-  const remote2Cmd = 'nx serve containify-remote --port 4202';
+  const hostCmd = 'nx serve containify-host --open';
+  const remote1Cmd = 'nx serve containify-remote --port 4301';
+  const remote2Cmd = 'nx serve containify-remote --port 4302';
 
   apps = await Promise.all([spawnAsync(hostCmd), spawnAsync(remote1Cmd), spawnAsync(remote2Cmd)]);
 })()

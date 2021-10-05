@@ -2,26 +2,28 @@ import { ChildProcess, execSync, spawn } from 'child_process';
 import * as kill from 'tree-kill';
 
 const args = process.argv.slice(2);
-let apps: ChildProcess[];
+let apps: ChildProcess[] = [];
+let errorCode = 0;
 
 (async () => {
-  apps = await Promise.all([startRemoteApp(4201), startRemoteApp(4202)]);
-  execSync(`nx run containify-host-e2e:e2e-cypress ${args}`, {
-    stdio: 'inherit',
-  });
+  apps = await Promise.all([
+    spawnWaitAsync(`nx serve containify-remote --port 4301`),
+    spawnWaitAsync(`nx serve containify-remote --port 4302`),
+  ]);
+
+  execSync(`nx run containify-host-e2e:e2e-cypress ${args}`, { stdio: 'inherit' });
 })()
   .catch((error) => {
-    console.log(error);
+    errorCode = 1;
+    console.error(error);
   })
   .finally(() => {
-    if (apps) {
-      apps.forEach((x) => kill(x.pid));
-    }
+    apps.forEach((x) => kill(x.pid));
+    process.exit(errorCode);
   });
 
-function startRemoteApp(port: number, timeout = 30000): Promise<ChildProcess> {
+function spawnWaitAsync(command: string, timeout = 60000): Promise<ChildProcess> {
   return new Promise<ChildProcess>((resolve, reject) => {
-    const command = `nx serve containify-remote --port ${port}`;
     const child = spawn(command, { shell: true });
     setTimeout(() => reject(child), timeout);
     child.stdout.setEncoding('utf8');
@@ -31,5 +33,7 @@ function startRemoteApp(port: number, timeout = 30000): Promise<ChildProcess> {
         resolve(child);
       }
     });
+    child.stderr.setEncoding('utf8');
+    child.stderr.on('data', (data: string) => console.error(data));
   });
 }
