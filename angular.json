@@ -108,7 +108,7 @@
         "e2e": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ts-node apps/containify-host-e2e/scripts/start-e2e.ts"]
+            "command": "ts-node apps/containify-host-e2e/scripts/start-e2e.ts"
           }
         },
         "lint": {
@@ -181,7 +181,7 @@
             },
             "development": {
               "browserTarget": "containify-remote:build:development",
-              "port": 4201
+              "port": 4300
             }
           },
           "defaultConfiguration": "development"

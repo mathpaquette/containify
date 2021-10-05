@@ -2,11 +2,11 @@
   {
     "id": "remote-app1",
     "name": "Test remote application 1",
-    "url": "http://localhost:4201"
+    "url": "http://localhost:4301"
   },
   {
     "id": "remote-app2",
     "name": "Test remote application 2",
-    "url": "http://localhost:4202"
+    "url": "http://localhost:4302"
   }
 ]
